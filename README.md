@@ -1,11 +1,17 @@
-# 通达OA 11.7 任意用户登录
-通过遍历UID找到在线的人员后，获取phpsession后即可任意登录。
+# 通达OA-exp
 
-```
-TongdaOA任意用户登录
-版本: 通达OA 11.7                  by:zjun
-Url: http://ip:port         https://www.zjun.info
-Use: python3 TongdaOA.py
-```
+**v11.7~v11.8任意用户登录+后台日志GetShell**
 
-![image-20210513182734181](https://oss.zjun.info/zjun.info/20210513182735.png)
+前台通过遍历UID找到在线的人员后，获取phpsession后即可登录
+
+后台通过.user.ini文件进行解析日志文件
+
+![image-20210524225046480](/Users/zjun/Library/Application Support/typora-user-images/image-20210524225046480.png)
+
+
+
+**思路来源**
+
+https://lorexxar.cn/2021/03/03/tongda11-7rce/
+
+https://lorexxar.cn/2021/03/09/tongda11-8/
