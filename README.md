@@ -6,7 +6,7 @@
 
 后台通过.user.ini文件进行解析日志文件
 
-![image-20210524225046480](/Users/zjun/Library/Application Support/typora-user-images/image-20210524225046480.png)
+![image-20210524230404313](https://oss.zjun.info/zjun.info/20210524230405.png)
 
 
 
